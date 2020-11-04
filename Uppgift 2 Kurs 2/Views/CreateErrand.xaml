@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="Uppgift_2_Kurs_2.CreateErrand"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Uppgift_2_Kurs_2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1200" >
+    
+    <Grid Background="CornflowerBlue" >
+
+        <StackPanel Margin="10" >
+            <TextBlock Text="CustomerName" FontSize="20"/>
+            <TextBox x:Name="tbxCustomerName" Text="" HorizontalAlignment="Stretch" Margin="0,10"/>
+            <ComboBox x:Name="cbxExistingCustomers" HorizontalAlignment="Stretch" Header="Existing Customers" FontSize="20"  />
+            <TextBlock Text="ErrandCatagory" FontSize="20"/>
+            <TextBox x:Name="tbxErrandCatagory" Text="" Margin="0,10" />
+
+            <TextBlock Text="ErrandDescription" FontSize="20" />
+            <TextBox x:Name="tbxErrandDescription" Text=""  TextWrapping="Wrap" Margin="0,10"/>
+
+        </StackPanel>
+       
+        <Button  x:Name="btnCreateNewErrand" Content="Create New Errand"  FontSize="30" Margin="20,0" Foreground="White" Click="btnCreateNewErrand_Click" Background="Transparent">
+            
+
+        </Button>
+        <Button x:Name="btnCreateNewErrandWithExistingCustomer" Content="Create New Errand With Existing Customer" HorizontalAlignment="Right" FontSize="30" Margin="20,0" Background="Transparent" Foreground="White" Click="btnCreateNewErrandWithExistingCustomer_Click">
+            
+        </Button>
+    </Grid>
+</Page>

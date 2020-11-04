@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="Uppgift_2_Kurs_2.Views.UpdateErrand"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Uppgift_2_Kurs_2.Views"
+    xmlns:models="using:LibaryAccess.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1200" Height="1000">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <GridView Grid.Row="0" x:Name="gvErrands" IsItemClickEnabled="True" SelectionMode="Single" >
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="models:Errand">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Bind Id}" Grid.Column="0" />
+                        <TextBlock Text="{x:Bind Catagory}" Grid.Column="1" />
+                        
+                        <TextBlock Text="{x:Bind Status}" Grid.Column="2" />
+                    </Grid>
+
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+        <StackPanel Grid.Row="1">
+        <TextBlock Text="ErrandStatus" FontSize="20"/>
+        <ComboBox x:Name="cbxChooseStatus" HorizontalAlignment="Stretch"/>
+            <TextBox x:Name="tbxChooseId" PlaceholderText="Enter ErrandId" HorizontalAlignment="Stretch"/>
+            <Button x:Name="btnUpdateErrand" Content="Update Errand" Click="btnUpdateErrand_Click" />
+        </StackPanel>
+    </Grid>
+</Page>
