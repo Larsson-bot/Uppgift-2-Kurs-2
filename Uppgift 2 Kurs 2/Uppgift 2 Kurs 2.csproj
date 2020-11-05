@@ -134,11 +134,11 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ListingCompletedErrands.xaml.cs">
+      <DependentUpon>ListingCompletedErrands.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ListingCurrentErrands.xaml.cs">
       <DependentUpon>ListingCurrentErrands.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ListingFinishedErrands.xaml.cs">
-      <DependentUpon>ListingFinishedErrands.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UpdateErrand.xaml.cs">
       <DependentUpon>UpdateErrand.xaml</DependentUpon>
@@ -172,11 +172,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ListingCurrentErrands.xaml">
+    <Page Include="Views\ListingCompletedErrands.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ListingFinishedErrands.xaml">
+    <Page Include="Views\ListingCurrentErrands.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

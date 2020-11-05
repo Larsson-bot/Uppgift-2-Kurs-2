@@ -27,20 +27,23 @@ namespace Uppgift_2_Kurs_2.Views
     public sealed partial class ListingCurrentErrands : Page
     {
   
-     private  IEnumerable<Errand> errands { get; set; }
+        private  IEnumerable<Errand> errands { get; set; }
         public  ListingCurrentErrands()
         {
             this.InitializeComponent();
             GetErrands().GetAwaiter();
+            
         }
         private async Task GetErrands()
         {
             errands = await SqliteContext.GetErrandsAsync();
+            gvErrands.ItemsSource = errands.Where(i => i.Status != "completed").OrderByDescending(i => i.Created).Take(SettingsData.GetMaxCompletedValue()).ToList();
             LoadAllErrands();
         }
         private void LoadAllErrands()
         {
-            lvErrands.ItemsSource = errands.ToList();
+            gvErrands.ItemsSource = errands;
+            
         }
 
     }

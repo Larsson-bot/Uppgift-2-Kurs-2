@@ -21,7 +21,7 @@ namespace LibaryAccess.Data
                 //       _settings = JsonConvert.DeserializeObject<Settings>(await FileIO.ReadTextAsync(settingsFile));
                 await storageFolder.CreateFileAsync("Settings.json", CreationCollisionOption.OpenIfExists);
                 StorageFile file = await storageFolder.GetFileAsync("Settings.json");
-                await FileIO.WriteTextAsync(file, "{\"Status\": [\"new\",\"active\",\"completed\"],\"MaxCompletedErrands\": \"5\" }");
+                await FileIO.WriteTextAsync(file, "{\"Status\": [\"new\",\"active\",\"completed\"],\"MaxActiveErrands\": 5 }");
                 _settings = JsonConvert.DeserializeObject<Settings>(await FileIO.ReadTextAsync(file));
             }
             catch
@@ -42,7 +42,7 @@ namespace LibaryAccess.Data
         }
         public static int GetMaxCompletedValue()
         {
-            return _settings.MaxCompletedErrands;
+            return _settings.MaxActiveErrands;
         }
     }
 
@@ -51,7 +51,7 @@ namespace LibaryAccess.Data
     public class Settings
     {
         public string[] Status { get; set; }
-        public int MaxCompletedErrands { get; set; }
+        public int MaxActiveErrands { get; set; }
     }
 
 

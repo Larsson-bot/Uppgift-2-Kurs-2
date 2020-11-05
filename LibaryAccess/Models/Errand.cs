@@ -33,12 +33,5 @@ namespace LibaryAccess.Models
         public DateTime Created { get; set; }
         public virtual Customer Customer { get; set; }
     }
-    public class ErrandViewModel
-    {
-        public ObservableCollection<Errand> Errands { get; set; }
-        public  ErrandViewModel()
-        {
-            SqliteContext.GetErrandsAsync().GetAwaiter();
-        }
-    }
+
 }

@@ -56,7 +56,7 @@ namespace Uppgift_2_Kurs_2
 
         private void btnCompleteErrands_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(typeof(ListingFinishedErrands));
+            frame.Navigate(typeof(ListingCompletedErrands));
         }
 
         private  void btnOngoingErrands_Click(object sender, RoutedEventArgs e)

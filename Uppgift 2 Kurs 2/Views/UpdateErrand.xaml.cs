@@ -49,9 +49,15 @@ namespace Uppgift_2_Kurs_2.Views
 
         private async void btnUpdateErrand_Click(object sender, RoutedEventArgs e)
         {
-            string status = cbxChooseStatus.SelectedItem.ToString();
-            long idFromTbx = Convert.ToInt64(tbxChooseId.Text);
-            await SqliteContext.UpdateErrandStatus(status,idFromTbx);
+          
+                string status = cbxChooseStatus.SelectedItem.ToString();
+            
+                long id = Convert.ToInt64(gvErrands.SelectedIndex + 1);
+        //        long idFromTbx = Convert.ToInt64(tbxChooseId.Text);
+                await SqliteContext.UpdateErrandStatus(status, id);
+   
+                Frame.Navigate(typeof(UpdateErrand));
+
         }
     }
 }

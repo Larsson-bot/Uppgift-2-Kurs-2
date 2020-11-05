@@ -10,36 +10,51 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Margin="10,0,0,0">
-        <TextBlock Text="ErrandId     Catagory                    Created                             Customer"/>
-            <ListView x:Name="lvErrands" IsItemClickEnabled="True" SelectionMode="Single"  >
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:Errand">
-                    <StackPanel Orientation="Horizontal" >
-                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                            <TextBlock Text="{x:Bind Id }" Margin="10,0,40,0" />
-                            <TextBlock Text="{x:Bind Catagory}" Margin="0,0,45,0"/>
-                                <TextBlock Text="{x:Bind Created}" Margin="0,0,45,0"/>
-                                <TextBlock Text="{x:Bind Status}" Margin="0,0,45,0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+   
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Text="Id" FontSize="26" Margin="0,0,75,0"/>
+            <TextBlock Text="Catagory" FontSize="26" Margin="0,0,95,0"/>
+            <TextBlock Text="Status" FontSize="26" Margin="0,0,82,0"/>
+            <TextBlock Text="Created" FontSize="26" Margin="0,0,130,0"/>
+            <TextBlock Text="CustomerDetails" FontSize="26"/>
+        </StackPanel>
 
-                            </StackPanel>
-                         <StackPanel Orientation="Vertical" Margin="20,0">
+        <GridView Grid.Row="1" x:Name="gvErrands" IsItemClickEnabled="True" SelectionMode="Single" HorizontalAlignment="Stretch">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="models:Errand">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <TextBlock Text="{x:Bind Id}" Grid.Column="0"  />
+                        <TextBlock Text="{x:Bind Catagory}" Grid.Column="1" />
+
+                        <TextBlock Text="{x:Bind Status}" Grid.Column="2" />
+
+
+                        <TextBlock Text="{x:Bind Created}" Grid.Column="3" />
+                        <StackPanel Orientation="Vertical" Margin="20,0" Grid.Column="4">
                             <TextBlock Text="{x:Bind Customer.Id}"/>
                             <TextBlock Text="{x:Bind Customer.Name}"/>
                             <TextBlock Text="{x:Bind Customer.Created}"/>
+                           
+                        </StackPanel>
+                    </Grid>
 
-                    </StackPanel>
-                    </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-            
-        </ListView>
-         
-        </StackPanel>
-       
+            </GridView.ItemTemplate>
+        </GridView>
+      
     </Grid>
 </Page>

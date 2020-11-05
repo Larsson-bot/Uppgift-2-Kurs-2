@@ -1,9 +1,11 @@
-﻿using LibaryAccess.Models;
+﻿using LibaryAccess.Data;
+using LibaryAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -18,16 +20,26 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uppgift_2_Kurs_2.Views
 {
+ 
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ListingFinishedErrands : Page
-    { private ErrandViewModel errandView {get; set;}
-        public ListingFinishedErrands()
+   
+    public sealed partial class ListingCompletedErrands : Page
+    { private IEnumerable<Errand> errands { get; set; }
+        public ListingCompletedErrands()
         {
             this.InitializeComponent();
-            errandView = new ErrandViewModel();
-            
+            GetErrands().GetAwaiter();
+        }
+        private async Task GetErrands()
+        {
+            errands = await SqliteContext.GetErrandsAsync();
+            LoadCompletedErrands();
+        }
+        private void LoadCompletedErrands()
+        {
+            gvCompletedErrands.ItemsSource = errands.Where(i => i.Status == "completed").OrderByDescending(i => i.CustomerId) .ToList();
         }
     }
 }
