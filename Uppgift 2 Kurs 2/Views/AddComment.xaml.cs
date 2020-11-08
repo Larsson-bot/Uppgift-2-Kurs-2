@@ -21,27 +21,39 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Uppgift_2_Kurs_2.Views
 {
- 
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-   
-    public sealed partial class ListingCompletedErrands : Page
-    { private IEnumerable<Errand> errands { get; set; }
-   
-        public ListingCompletedErrands()
+    public sealed partial class AddComment : Page
+    {
+        public ObservableCollection<Errand> errands { get; set; }
+        public AddComment()
         {
             this.InitializeComponent();
             GetErrands().GetAwaiter();
         }
+
         private async Task GetErrands()
         {
             errands = await SqliteContext.GetErrandsAsync();
-            LoadCompletedErrands();
         }
-        private void LoadCompletedErrands()
+
+        private async void btnAddComment_Click(object sender, RoutedEventArgs e)
         {
-            gvCompletedErrands.ItemsSource = errands.Where(i => i.Status == "completed").OrderByDescending(i => i.CustomerId) .ToList();
+            if (tbxComment.Text == "")
+            {
+                tbNoCommentMessage.Text = "Please input a comment";
+            }
+            else
+            {
+                tbNoCommentMessage.Text = "";
+                string comment = tbxComment.Text;
+                long id = Convert.ToInt64(gvErrands.SelectedIndex + 1);
+                await SqliteContext.CreateCommentAsync(new Comment { ErrandId = id, Description = comment, Created = DateTime.Now });
+                tbxComment.Text = "";
+            }
+         
+           
         }
     }
 }

@@ -37,14 +37,8 @@ namespace Uppgift_2_Kurs_2.Views
         private async Task GetErrands()
         {
             errands = await SqliteContext.GetErrandsAsync();
-            gvErrands.ItemsSource = errands.Where(i => i.Status != "completed").OrderByDescending(i => i.Created).Take(SettingsData.GetMaxCompletedValue()).ToList();
-            LoadAllErrands();
-        }
-        private void LoadAllErrands()
-        {
-            gvErrands.ItemsSource = errands;
-            
-        }
+            gvErrands.ItemsSource = errands.Where(i => i.Status != "completed").OrderByDescending(i => i.Created).Take(SettingsData.GetMaxActiveValue()).ToList();
 
+        }
     }
 }

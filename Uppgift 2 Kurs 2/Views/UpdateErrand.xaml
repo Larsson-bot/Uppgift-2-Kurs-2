@@ -8,21 +8,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1200" Height="1000">
-
+    <Page.Resources>
+        <CollectionViewSource x:Name="Collection" Source="{x:Bind errands }"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="360"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="330" />
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="2">
             <TextBlock Text="Id" FontSize="26" Margin="0,0,75,0"/>
             <TextBlock Text="Catagory" FontSize="26" Margin="0,0,95,0"/>
             <TextBlock Text="Status" FontSize="26" Margin="0,0,82,0"/>
             <TextBlock Text="Created" FontSize="26" Margin="0,0,130,0"/>
             <TextBlock Text="CustomerDetails" FontSize="26"/>
         </StackPanel>
-        <GridView Grid.Row="1" x:Name="gvErrands" IsItemClickEnabled="True" SelectionMode="Single" HorizontalAlignment="Stretch">
+
+        <GridView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Source={StaticResource Collection}}" x:Name="gvErrands" IsItemClickEnabled="True" SelectionMode="Single" HorizontalAlignment="Stretch" >
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:Errand">
                     <Grid>
@@ -34,30 +45,33 @@
                             <ColumnDefinition Width="200"/>
                         </Grid.ColumnDefinitions>
 
-                      
+
                         <TextBlock Text="{x:Bind Id}" Grid.Column="0"  />
                         <TextBlock Text="{x:Bind Catagory}" Grid.Column="1" />
-
                         <TextBlock Text="{x:Bind Status}" Grid.Column="2" />
-                     
-
                         <TextBlock Text="{x:Bind Created}" Grid.Column="3" />
+
                         <StackPanel Orientation="Vertical" Margin="20,0" Grid.Column="4">
                             <TextBlock Text="{x:Bind Customer.Id}"/>
                             <TextBlock Text="{x:Bind Customer.Name}"/>
                             <TextBlock Text="{x:Bind Customer.Created}"/>
-
                         </StackPanel>
                     </Grid>
-
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
-        <StackPanel Grid.Row="2">
-        <TextBlock Text="ErrandStatus" FontSize="20"/>
-            
-            <ComboBox x:Name="cbxChooseStatus" HorizontalAlignment="Stretch" SelectedIndex="0" Header="Select the index you want to change status on." />
+        
+        <StackPanel DataContext="{Binding Source={StaticResource Collection}}" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical" Grid.Row="2">
+            <TextBlock Text="ErrandDescription" FontSize="26" Margin="0,20,0,0"/>
+            <TextBlock Text="{Binding Description}" TextWrapping="Wrap"    />
+        </StackPanel>
+        
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <TextBlock Text="ErrandStatus" FontSize="20" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="cbxChooseStatus" SelectedIndex="0" Header="Select the index you want to change status on." />
             <Button x:Name="btnUpdateErrand" Content="Update Errand" Click="btnUpdateErrand_Click" />
         </StackPanel>
+        
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="A StatusUpdate Comment will automatically be added to the Errand when you update the status." TextWrapping="Wrap"  FontSize="24" Padding="20"/>
     </Grid>
 </Page>

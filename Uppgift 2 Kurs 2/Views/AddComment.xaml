@@ -1,21 +1,30 @@
 ﻿<Page
-    x:Class="Uppgift_2_Kurs_2.Views.ListingCurrentErrands"
+    x:Class="Uppgift_2_Kurs_2.Views.AddComment"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Uppgift_2_Kurs_2.Views"
+    xmlns:models="using:LibaryAccess.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models ="using:LibaryAccess.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1200">
-
+    <Page.Resources>
+        <CollectionViewSource x:Name="Collection" Source="{x:Bind errands }"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
-            <RowDefinition/>
+            <RowDefinition Height="360"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-   
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="330" />
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock Text="Id" FontSize="26" Margin="0,0,75,0"/>
             <TextBlock Text="Catagory" FontSize="26" Margin="0,0,95,0"/>
             <TextBlock Text="Status" FontSize="26" Margin="0,0,82,0"/>
@@ -23,7 +32,7 @@
             <TextBlock Text="CustomerDetails" FontSize="26"/>
         </StackPanel>
 
-        <GridView Grid.Row="1" x:Name="gvErrands" IsItemClickEnabled="True" SelectionMode="Single" HorizontalAlignment="Stretch">
+        <GridView Grid.Row="1" ItemsSource="{Binding Source={StaticResource Collection}}" x:Name="gvErrands" IsItemClickEnabled="True" SelectionMode="Single" HorizontalAlignment="Stretch" >
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:Errand">
                     <Grid>
@@ -35,21 +44,31 @@
                             <ColumnDefinition Width="200"/>
                         </Grid.ColumnDefinitions>
 
-
                         <TextBlock Text="{x:Bind Id}" Grid.Column="0"  />
                         <TextBlock Text="{x:Bind Catagory}" Grid.Column="1" />
                         <TextBlock Text="{x:Bind Status}" Grid.Column="2" />
                         <TextBlock Text="{x:Bind Created}" Grid.Column="3" />
-
+                        
                         <StackPanel Orientation="Vertical" Margin="20,0" Grid.Column="4">
                             <TextBlock Text="{x:Bind Customer.Id}"/>
                             <TextBlock Text="{x:Bind Customer.Name}"/>
                             <TextBlock Text="{x:Bind Customer.Created}"/>
                         </StackPanel>
-
                     </Grid>
+
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
+        <StackPanel Grid.Row="2" DataContext="{Binding Source={StaticResource Collection}}"  Orientation="Vertical" >
+            <TextBlock Text="ErrandDescription" FontSize="26" Margin="0,20,0,0"/>
+            <TextBlock Text="{Binding Description}" TextWrapping="Wrap"    />
+        </StackPanel>
+        
+        <StackPanel Grid.Row="3" >
+            <TextBlock  Text="Select the Index you want to comment on." FontSize="20" Margin="0,10"/>
+            <TextBox x:Name="tbxComment" Header="Write your comment here." FontSize="20" Margin="10"  TextWrapping="Wrap"/>
+            <TextBlock x:Name="tbNoCommentMessage" />
+            <Button x:Name="btnAddComment" Content="Add Comment To Errand" HorizontalAlignment="Stretch" Margin="0,10" Click="btnAddComment_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

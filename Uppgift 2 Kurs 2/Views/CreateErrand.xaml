@@ -8,26 +8,24 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="1200" >
     
-    <Grid Background="CornflowerBlue" >
+    <Grid  >
 
-        <StackPanel Margin="10" >
-            <TextBlock Text="CustomerName" FontSize="20"/>
-            <TextBox x:Name="tbxCustomerName" Text="" HorizontalAlignment="Stretch" Margin="0,10"/>
+        <StackPanel >
+            <TextBox x:Name="tbxCustomerName" Text="" HorizontalAlignment="Stretch" Margin="0,10" Header="CustomerName" FontSize="20"/>
             <ComboBox x:Name="cbxExistingCustomers" HorizontalAlignment="Stretch" Header="Existing Customers" FontSize="20"  />
-            <TextBlock Text="ErrandCatagory" FontSize="20"/>
-            <TextBox x:Name="tbxErrandCatagory" Text="" Margin="0,10" />
-
-            <TextBlock Text="ErrandDescription" FontSize="20" />
-            <TextBox x:Name="tbxErrandDescription" Text=""  TextWrapping="Wrap" Margin="0,10"/>
-
+            <TextBox x:Name="tbxErrandCatagory" Text="" Margin="0,10" Header="ErrandCatagory" FontSize="20" />
+            <TextBox x:Name="tbxErrandDescription" Text=""  TextWrapping="Wrap" Margin="0,10" Header="ErrandDescription" FontSize="20"/>
+            
+            <TextBlock x:Name="tbCombobox" Text=""/>
+            <TextBlock x:Name="tbCatagory" Text=""/>
+            <TextBlock x:Name="tbDescription" Text=""/>
+            <TextBlock/>
         </StackPanel>
-       
-        <Button  x:Name="btnCreateNewErrand" Content="Create New Errand"  FontSize="30" Margin="20,0" Foreground="White" Click="btnCreateNewErrand_Click" Background="Transparent">
-            
 
+        <Button  x:Name="btnCreateNewErrand" Content="Create New Errand"  FontSize="30" Margin="20,0" Foreground="White" Click="btnCreateNewErrand_Click" Background="CornflowerBlue">
         </Button>
-        <Button x:Name="btnCreateNewErrandWithExistingCustomer" Content="Create New Errand With Existing Customer" HorizontalAlignment="Right" FontSize="30" Margin="20,0" Background="Transparent" Foreground="White" Click="btnCreateNewErrandWithExistingCustomer_Click">
-            
-        </Button>
+        
+        <Button x:Name="btnCreateNewErrandWithExistingCustomer" Content="Create New Errand With Existing Customer" HorizontalAlignment="Right" FontSize="30" Margin="30,0" Background="CornflowerBlue" Foreground="White" Click="btnCreateNewErrandWithExistingCustomer_Click">
+       </Button>
     </Grid>
 </Page>

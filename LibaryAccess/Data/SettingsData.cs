@@ -14,22 +14,12 @@ namespace LibaryAccess.Data
         private static Settings _settings { get; set; }
         public static async Task GetSettingsFromFile()
         {
-             StorageFolder storageFolder =  ApplicationData.Current.LocalFolder;
-            try
-            {
-                //    StorageFile settingsFile = await storageFolder.GetFileAsync("Settings.json");
-                //       _settings = JsonConvert.DeserializeObject<Settings>(await FileIO.ReadTextAsync(settingsFile));
-                await storageFolder.CreateFileAsync("Settings.json", CreationCollisionOption.OpenIfExists);
-                StorageFile file = await storageFolder.GetFileAsync("Settings.json");
-                await FileIO.WriteTextAsync(file, "{\"Status\": [\"new\",\"active\",\"completed\"],\"MaxActiveErrands\": 5 }");
-                _settings = JsonConvert.DeserializeObject<Settings>(await FileIO.ReadTextAsync(file));
-            }
-            catch
-            {
-       
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
 
-            }
-            
+            await storageFolder.CreateFileAsync("Settings.json", CreationCollisionOption.OpenIfExists);
+            StorageFile file = await storageFolder.GetFileAsync("Settings.json");
+            await FileIO.WriteTextAsync(file, "{\"Status\": [\"new\",\"active\",\"completed\"],\"MaxActiveErrands\": 5 }");
+            _settings = JsonConvert.DeserializeObject<Settings>(await FileIO.ReadTextAsync(file));
         }
         public static IEnumerable<string> GetStatus()
         {
@@ -40,7 +30,7 @@ namespace LibaryAccess.Data
             }
             return list;
         }
-        public static int GetMaxCompletedValue()
+        public static int GetMaxActiveValue()
         {
             return _settings.MaxActiveErrands;
         }

@@ -24,7 +24,6 @@ namespace LibaryAccess.Models
             Created = created;
 
         }
-
         public long Id { get; set; }
         public long CustomerId { get; set; }
         public string Catagory { get; set; }

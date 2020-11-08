@@ -2,6 +2,7 @@
 using LibaryAccess.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,7 +27,7 @@ namespace Uppgift_2_Kurs_2.Views
     /// </summary>
     public sealed partial class UpdateErrand : Page
     {
-        private IEnumerable<Errand> errands { get; set; }
+        public ObservableCollection<Errand> errands { get; set; }
         public UpdateErrand()
         {
             this.InitializeComponent();
@@ -40,24 +41,41 @@ namespace Uppgift_2_Kurs_2.Views
         private async Task GetErrands()
         {
             errands = await SqliteContext.GetErrandsAsync();
-            LoadAllErrands();
-        }
-        private void LoadAllErrands()
-        {
-            gvErrands.ItemsSource = errands.ToList();
+
         }
 
         private async void btnUpdateErrand_Click(object sender, RoutedEventArgs e)
         {
-          
-                string status = cbxChooseStatus.SelectedItem.ToString();
-            
-                long id = Convert.ToInt64(gvErrands.SelectedIndex + 1);
-        //        long idFromTbx = Convert.ToInt64(tbxChooseId.Text);
-                await SqliteContext.UpdateErrandStatus(status, id);
-   
-                Frame.Navigate(typeof(UpdateErrand));
+            string status = cbxChooseStatus.SelectedItem.ToString();
+            long id = Convert.ToInt64(gvErrands.SelectedIndex + 1);
+
+            await SqliteContext.UpdateErrandStatus(status, id);
+
+            switch (cbxChooseStatus.SelectedItem)
+            {
+                case "new":
+                    {
+                        string comment = "ErrandStatus updated to new";
+                        await SqliteContext.CreateCommentAsync(new Comment { ErrandId = id, Description = comment, Created = DateTime.Now });
+                    }
+                    break;
+                case "active":
+                    {
+                        string comment = "ErrandStatus updated to active";
+                        await SqliteContext.CreateCommentAsync(new Comment { ErrandId = id, Description = comment, Created = DateTime.Now });
+                    }
+                    break;
+                case "completed":
+                    {
+                        string comment = "ErrandStatus updated to completed";
+                        await SqliteContext.CreateCommentAsync(new Comment { ErrandId = id, Description = comment, Created = DateTime.Now });
+                    }
+                    break;
+
+            }
+            Frame.Navigate(typeof(UpdateErrand));
 
         }
+
     }
 }

@@ -27,27 +27,17 @@ namespace Uppgift_2_Kurs_2
     /// </summary>
     public sealed partial class MainPage : Page
     {
-     
- 
+
+
         public MainPage()
         {
             this.InitializeComponent();
-            
-        
         }
 
-      
-       
-   
-
-        private  void btnCreateErrand_Click(object sender, RoutedEventArgs e)
+        private void btnCreateErrand_Click(object sender, RoutedEventArgs e)
         {
-           
             frame.Navigate(typeof(CreateErrand));
- 
-  
-      
-                }
+        }
 
         private void btnUpdateErrand_Click(object sender, RoutedEventArgs e)
         {
@@ -59,10 +49,20 @@ namespace Uppgift_2_Kurs_2
             frame.Navigate(typeof(ListingCompletedErrands));
         }
 
-        private  void btnOngoingErrands_Click(object sender, RoutedEventArgs e)
+        private void btnOngoingErrands_Click(object sender, RoutedEventArgs e)
         {
             frame.Navigate(typeof(ListingCurrentErrands));
 
+        }
+
+        private void btnAddComment_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(typeof(AddComment));
+        }
+
+        private void btnViewComment_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(typeof(ViewComments));
         }
     }
 }

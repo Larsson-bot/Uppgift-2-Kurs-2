@@ -33,6 +33,18 @@ namespace Uppgift_2_Kurs_2
 
         private async void btnCreateNewErrand_Click(object sender, RoutedEventArgs e)
         {
+            if (tbxCustomerName.Text == "")
+            {
+                tbxCustomerName.Text = "EC UTBILDNING";
+            }
+            if (tbxErrandCatagory.Text == "")
+            {
+                tbxErrandCatagory.Text = "InternetIssues";
+            }
+            if (tbxErrandDescription.Text == "")
+            {
+                tbxErrandDescription.Text = "Cant connect to internet.";
+            }
             await SqliteContext.CreateErrandAsync(new Errand { CustomerId = await SqliteContext.CreateCustomerAsync(new Customer { Name = tbxCustomerName.Text, Created = DateTime.Now }), Catagory = tbxErrandCatagory.Text, Description = tbxErrandDescription.Text });
             ClearAllTextBoxes();
             await LoadCustomers();
@@ -42,6 +54,14 @@ namespace Uppgift_2_Kurs_2
             tbxCustomerName.Text = "";
             tbxErrandCatagory.Text = "";
             tbxErrandDescription.Text = "";
+            cbxExistingCustomers.SelectedIndex = -1;
+        }
+
+        private void ClearAllAssistingTextBoxes()
+        {
+            tbCombobox.Text = "";
+            tbCatagory.Text = "";
+            tbDescription.Text = "";
         }
 
         private async Task LoadCustomers()
@@ -51,8 +71,24 @@ namespace Uppgift_2_Kurs_2
 
         private async void btnCreateNewErrandWithExistingCustomer_Click(object sender, RoutedEventArgs e)
         {
-            await SqliteContext.CreateErrandAsync(new Errand { CustomerId  = await SqliteContext.GetCustomerIdByName(cbxExistingCustomers.SelectedItem.ToString()), Catagory = tbxErrandCatagory.Text, Description = tbxErrandDescription.Text });
-            ClearAllTextBoxes();
+            ClearAllAssistingTextBoxes();
+
+            if (cbxExistingCustomers.SelectedIndex == -1)
+                tbCombobox.Text = "Please select a Customer from the combobox if you wish to create a Errand with a existing customer.";
+            if (tbxErrandCatagory.Text == "")
+            {
+                tbCatagory.Text = "Please type in the catagory.";
+            }
+            if (tbxErrandDescription.Text == "")
+            {
+                tbDescription.Text = "Please type in the description you want your errand to have.";
+            }
+            else
+            {
+                await SqliteContext.CreateErrandAsync(new Errand { CustomerId = await SqliteContext.GetCustomerIdByName(cbxExistingCustomers.SelectedItem.ToString()), Catagory = tbxErrandCatagory.Text, Description = tbxErrandDescription.Text });
+                ClearAllTextBoxes();
+            }
+             
         }
     }
 }

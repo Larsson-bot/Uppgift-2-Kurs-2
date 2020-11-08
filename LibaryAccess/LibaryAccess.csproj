@@ -122,6 +122,7 @@
   <ItemGroup>
     <Compile Include="Data\SettingsData.cs" />
     <Compile Include="Data\SqliteContext.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Errand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

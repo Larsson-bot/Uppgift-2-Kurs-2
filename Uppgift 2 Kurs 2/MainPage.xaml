@@ -23,8 +23,8 @@
             <Button x:Name="btnUpdateErrand" Content="Update Errand" HorizontalAlignment="Stretch" Margin="0,10,0,0" Height="60" Background="Transparent" Foreground="White" Click="btnUpdateErrand_Click" />
             <Button x:Name="btnOngoingErrands" Content="View Ongoing Errands" HorizontalAlignment="Stretch" Height="60"  Click="btnOngoingErrands_Click"  Background="Transparent" Foreground="White" />
             <Button x:Name="btnCompleteErrands" Content="View Completed Errands" HorizontalAlignment="Stretch" Height="60" Background="Transparent" Foreground="White" Click="btnCompleteErrands_Click"  />
-
-        
+            <Button x:Name="btnAddComment" Content="Add Comment To Errand" HorizontalAlignment="Stretch" Height="60" Background="Transparent" Foreground="White"  Click="btnAddComment_Click"/>
+            <Button x:Name="btnViewComment" Content="View Comments" HorizontalAlignment="Stretch" Height="60"  Background="Transparent" Foreground="White" Click="btnViewComment_Click"/>
         </StackPanel>
         <Frame x:Name="frame" Grid.Column="1" Grid.ColumnSpan="2" Width="1200" Height="1000"  />
 

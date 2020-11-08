@@ -13,8 +13,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
+        
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <TextBlock Text="Id" FontSize="26" Margin="0,0,75,0"/>
             <TextBlock Text="Catagory" FontSize="26" Margin="0,0,95,0"/>
@@ -22,6 +22,7 @@
             <TextBlock Text="Created" FontSize="26" Margin="0,0,130,0"/>
             <TextBlock Text="CustomerDetails" FontSize="26"/>
         </StackPanel>
+
         <GridView Grid.Row="1" x:Name="gvCompletedErrands" IsItemClickEnabled="True" SelectionMode="Single" HorizontalAlignment="Stretch">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:Errand">
@@ -37,23 +38,18 @@
 
                         <TextBlock Text="{x:Bind Id}" Grid.Column="0"  />
                         <TextBlock Text="{x:Bind Catagory}" Grid.Column="1" />
-
                         <TextBlock Text="{x:Bind Status}" Grid.Column="2" />
-
-
                         <TextBlock Text="{x:Bind Created}" Grid.Column="3" />
+
                         <StackPanel Orientation="Vertical" Margin="20,0" Grid.Column="4">
                             <TextBlock Text="{x:Bind Customer.Id}"/>
                             <TextBlock Text="{x:Bind Customer.Name}"/>
                             <TextBlock Text="{x:Bind Customer.Created}"/>
-
                         </StackPanel>
+                        
                     </Grid>
-
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
-
-  
     </Grid>
 </Page>
