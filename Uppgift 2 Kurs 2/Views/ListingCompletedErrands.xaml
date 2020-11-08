@@ -23,7 +23,7 @@
             <TextBlock Text="CustomerDetails" FontSize="26"/>
         </StackPanel>
 
-        <GridView Grid.Row="1" x:Name="gvCompletedErrands" IsItemClickEnabled="True" SelectionMode="Single" HorizontalAlignment="Stretch">
+        <GridView Grid.Row="1" x:Name="gvCompletedErrands" IsItemClickEnabled="True" SelectionMode="Single" HorizontalAlignment="Stretch" Height="700"  Margin="0,0,0,240">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="models:Errand">
                     <Grid>
@@ -42,8 +42,11 @@
                         <TextBlock Text="{x:Bind Created}" Grid.Column="3" />
 
                         <StackPanel Orientation="Vertical" Margin="20,0" Grid.Column="4">
+                            <TextBlock Text="CustomerId" FontWeight="Bold"/>
                             <TextBlock Text="{x:Bind Customer.Id}"/>
+                            <TextBlock Text="CustomerName" FontWeight="Bold"/>
                             <TextBlock Text="{x:Bind Customer.Name}"/>
+                            <TextBlock Text="Created" FontWeight="Bold"/>
                             <TextBlock Text="{x:Bind Customer.Created}"/>
                         </StackPanel>
                         

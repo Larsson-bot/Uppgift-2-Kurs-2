@@ -42,8 +42,11 @@
                         <TextBlock Text="{x:Bind Created}" Grid.Column="3" />
 
                         <StackPanel Orientation="Vertical" Margin="20,0" Grid.Column="4">
+                            <TextBlock Text="CustomerId" FontWeight="Bold"/>
                             <TextBlock Text="{x:Bind Customer.Id}"/>
+                            <TextBlock Text="CustomerName" FontWeight="Bold"/>
                             <TextBlock Text="{x:Bind Customer.Name}"/>
+                            <TextBlock Text="Created" FontWeight="Bold"/>
                             <TextBlock Text="{x:Bind Customer.Created}"/>
                         </StackPanel>
 

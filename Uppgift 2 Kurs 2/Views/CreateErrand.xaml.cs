@@ -77,18 +77,17 @@ namespace Uppgift_2_Kurs_2
                 tbCombobox.Text = "Please select a Customer from the combobox if you wish to create a Errand with a existing customer.";
             if (tbxErrandCatagory.Text == "")
             {
-                tbCatagory.Text = "Please type in the catagory.";
+                tbCatagory.Text = "Please type in the catagory in the ErrandCatagory textbox.";
             }
             if (tbxErrandDescription.Text == "")
             {
-                tbDescription.Text = "Please type in the description you want your errand to have.";
+                tbDescription.Text = "Please type in the description you want your errand to have in the ErrandDescription textbox.";
             }
-            else
+            if (cbxExistingCustomers.SelectedIndex != -1 && tbxErrandCatagory.Text != "" && tbxErrandDescription.Text != "")
             {
                 await SqliteContext.CreateErrandAsync(new Errand { CustomerId = await SqliteContext.GetCustomerIdByName(cbxExistingCustomers.SelectedItem.ToString()), Catagory = tbxErrandCatagory.Text, Description = tbxErrandDescription.Text });
                 ClearAllTextBoxes();
             }
-             
         }
     }
 }
